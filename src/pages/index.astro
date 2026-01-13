@@ -10,7 +10,7 @@ import { CopyButton } from "../ui/copy-button";
     class="relative flex min-h-dvh flex-col items-center justify-end bg-[#fafaf5] px-0 sm:px-4"
   >
     <div
-      class="pointer-events-none absolute inset-0 mask-b-from-80% mask-b-to-100%"
+      class="pointer-events-none absolute inset-0 mask-t-from-70% mask-t-to-100% mask-b-from-80% mask-b-to-100%"
       aria-hidden="true"
     >
       <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
@@ -47,75 +47,122 @@ import { CopyButton } from "../ui/copy-button";
       </svg>
     </div>
 
-    <div class="mt-20 w-full max-w-3xl">
+    <div class="px mt-20 w-full max-w-3xl">
       <div class="mx-auto w-full">
-        <div class="mb-12">
-          <h1 class="text-2xl font-medium text-pretty text-neutral-900">
-            UI Skills
-          </h1>
-          <p class="mt-2 text-base text-neutral-900">
+        <div class="mb-14 px-4 sm:px-0">
+          <h1 class="text-parchment-900 text-3xl font-medium">UI Skills</h1>
+          <p class="text-parchment-600 mt-3 text-lg">
             Opinionated constraints for building better interfaces with agents.
           </p>
         </div>
 
-        <div
-          class="relative mb-16 flex items-center justify-between rounded-none border-t border-b border-neutral-200 bg-white py-2.5 pr-4 pl-6 shadow-2xs sm:rounded-[8px] sm:border-none sm:ring-1 sm:ring-black/5"
-        >
-          <code class="font-mono text-[14px] font-medium tracking-tight">
-            <span class="text-[#953800]">curl</span>
-            <span class="text-[#0550ae]"> -fsSL</span>
-            <span class="text-[#0a3069]"> https://ui-skills.com/install</span>
-            <span class="text-[#cf222e]"> |</span>
-            <span class="text-[#953800]"> bash</span>
-          </code>
-          <div class="flex items-center gap-1">
-            <CopyButton
-              content="curl -fsSL https://ui-skills.com/install | bash"
-              showText={false}
-              className="size-8"
-              client:load
-            />
-          </div>
+        <div class="space-y-16">
+          <section>
+            <h2
+              class="text-parchment-900 mb-4 px-4 text-base font-medium sm:px-0"
+            >
+              Installation
+            </h2>
+            <div
+              class="relative flex items-center justify-between rounded-none border-t border-b border-neutral-200 bg-white py-3.5 pr-4 pl-6 shadow-2xs sm:rounded-[8px] sm:border-none sm:ring-1 sm:ring-black/10"
+            >
+              <code class="font-mono text-[15px]">
+                <span class="text-[#953800]">curl</span>
+                <span class="text-[#0550ae]"> -fsSL</span>
+                <span class="text-[#0a3069]">
+                  https://ui-skills.com/install</span
+                >
+                <span class="text-[#cf222e]"> |</span>
+                <span class="text-[#953800]"> bash</span>
+              </code>
+              <div class="flex items-center gap-1">
+                <CopyButton
+                  content="curl -fsSL https://ui-skills.com/install | bash"
+                  showText={false}
+                  className="size-8"
+                  client:load
+                />
+              </div>
+            </div>
+            <p class="text-parchment-500 mt-4 px-4 text-[15px] sm:px-0">
+              Support Claude Code, Cursor, OpenCode and more.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              class="text-parchment-900 mb-4 px-4 text-base font-medium sm:px-0"
+            >
+              Usage
+            </h2>
+            <div
+              class="relative flex items-center justify-between rounded-none border-t border-b border-neutral-200 bg-white py-3.5 pr-4 pl-6 shadow-2xs sm:rounded-[8px] sm:border-none sm:ring-1 sm:ring-black/10"
+            >
+              <code class="font-mono text-[15px]">
+                <span class="text-[#953800]">/ui-skills</span>
+                <span class="text-parchment-400">
+                  add dark mode to settings</span
+                >
+              </code>
+              <div class="flex items-center gap-1">
+                <CopyButton
+                  content="/ui-skills add dark mode to settings"
+                  showText={false}
+                  className="size-8"
+                  client:load
+                />
+              </div>
+            </div>
+          </section>
         </div>
       </div>
 
       <div
-        class="relative mt-32 w-full max-w-3xl rounded-none border-t border-b border-neutral-200 bg-white px-6 py-12 shadow-2xs sm:rounded-[8px] sm:border-none sm:shadow-2xs sm:ring-1 sm:ring-black/10"
+        class="relative mt-32 w-full max-w-3xl rounded-none border-t border-b border-neutral-200 bg-white px-8 py-14 shadow-2xs sm:rounded-[8px] sm:border-none sm:shadow-2xs sm:ring-1 sm:ring-black/10"
       >
-        <div class="absolute top-6 right-6">
+        <div class="absolute top-6 right-8">
           <CopyButton content={skillsRaw} client:load />
         </div>
         <div class="mx-auto max-w-2xl">
           <div
-            class="prose prose-neutral prose-sm prose-headings:text-balance prose-headings:font-medium prose-headings:text-[15px] prose-h1:mb-6 prose-h2:mt-10 prose-h2:mb-3 prose-p:my-4 prose-p:font-normal prose-p:text-[15px] prose-p:text-neutral-500 prose-p:text-pretty prose-ul:my-4 prose-li:my-2 prose-li:pl-0 prose-li:font-normal prose-li:text-[15px] prose-li:text-neutral-500 prose-li:marker:text-neutral-300 max-w-none font-mono"
+            class="prose prose-neutral prose-headings:text-balance prose-headings:font-medium prose-headings:text-[15px] prose-h1:mt-0 prose-h1:mb-6 prose-h1:text-[18px] prose-h2:mt-8 prose-h2:mb-3 prose-p:my-3 prose-p:font-normal prose-p:text-[14px] prose-p:text-parchment-600 prose-p:text-pretty prose-ul:my-3 prose-li:my-1.5 prose-li:pl-0 prose-li:font-normal prose-li:text-[14px] prose-li:text-parchment-600 prose-li:marker:text-parchment-300 max-w-none font-mono"
           >
+            <div class="text-parchment-400 mb-8 text-[14px]">
+              <div>---</div>
+              <div>name: ui-skills</div>
+              <div>
+                description: Opinionated constraints for building better
+                interfaces with agents.
+              </div>
+              <div>---</div>
+            </div>
             <Skills />
           </div>
         </div>
       </div>
 
       <footer
-        class="flex items-center gap-2 px-4 py-14 text-sm font-medium text-neutral-400 sm:px-0"
+        class="text-parchment-400 flex w-full items-center justify-center gap-3 px-4 py-20 text-center text-base font-medium sm:px-0"
       >
         <a
           href="https://github.com/ibelick/ui-skills"
           target="_blank"
           rel="noopener noreferrer"
-          class="hover:text-neutral-900"
+          class="hover:text-parchment-900"
         >
           GitHub
         </a>
-        <span class="text-neutral-300">·</span>
+        <span class="text-parchment-200">·</span>
         <a
           href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview?utm_source=ui-skills.com"
           target="_blank"
           rel="noopener noreferrer"
-          class="hover:text-neutral-900"
+          class="hover:text-parchment-900"
         >
           Claude Skills
         </a>
-        <span class="text-neutral-300">·</span>
-        <a href="/llms.txt" class="hover:text-neutral-900"> llms.txt </a>
+        <span class="text-parchment-200">·</span>
+        <a href="/llms.txt" class="hover:text-parchment-900"> llms.txt </a>
       </footer>
     </div>
   </div>
