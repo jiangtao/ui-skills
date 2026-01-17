@@ -2,8 +2,8 @@
 set -e
 
 # UI Skills installer
-# Installs the skill into the current project's .claude directory
-# and optional command locations for supported tools.
+# Installs the skill into project skill directories for Cursor and Claude,
+# plus optional command locations for supported tools.
 
 # Colors (only if stdout is a TTY)
 if [ -t 1 ]; then
@@ -73,20 +73,38 @@ if [ ! -s "$TMP_SKILL" ]; then
   exit 1
 fi
 
-# Strip YAML frontmatter for command-style installs
-sed '1,/^---$/d' "$TMP_SKILL" | sed '1,/^---$/d' > "$TMP_COMMAND"
+# Use full skill content for command installs
+cp "$TMP_SKILL" "$TMP_COMMAND"
 
 printf "\n"
 
 OPTIONAL_INSTALLED=0
 
 # Project skill (current working directory)
-PROJECT_DIR="${PWD}/.claude/skills/${INSTALL_DIRNAME}"
-PROJECT_FILE="${PROJECT_DIR}/SKILL.md"
-print_info "Project install: $PROJECT_DIR"
-mkdir -p "$PROJECT_DIR"
-cp "$TMP_SKILL" "$PROJECT_FILE"
-print_success "Project skill installed: $PROJECT_FILE"
+CLAUDE_PROJECT_DIR="${PWD}/.claude/skills/${INSTALL_DIRNAME}"
+CLAUDE_PROJECT_FILE="${CLAUDE_PROJECT_DIR}/SKILL.md"
+print_info "Claude project install: $CLAUDE_PROJECT_DIR"
+mkdir -p "$CLAUDE_PROJECT_DIR"
+cp "$TMP_SKILL" "$CLAUDE_PROJECT_FILE"
+print_success "Claude project skill installed: $CLAUDE_PROJECT_FILE"
+
+CURSOR_PROJECT_DIR="${PWD}/.cursor/skills/${INSTALL_DIRNAME}"
+CURSOR_PROJECT_FILE="${CURSOR_PROJECT_DIR}/SKILL.md"
+print_info "Cursor project install: $CURSOR_PROJECT_DIR"
+mkdir -p "$CURSOR_PROJECT_DIR"
+cp "$TMP_SKILL" "$CURSOR_PROJECT_FILE"
+print_success "Cursor project skill installed: $CURSOR_PROJECT_FILE"
+
+# Project commands
+CURSOR_PROJECT_COMMAND_DIR="${PWD}/.cursor/commands"
+mkdir -p "$CURSOR_PROJECT_COMMAND_DIR"
+cp "$TMP_COMMAND" "$CURSOR_PROJECT_COMMAND_DIR/$INSTALL_NAME"
+print_success "Cursor project command installed: $CURSOR_PROJECT_COMMAND_DIR/$INSTALL_NAME"
+
+CLAUDE_PROJECT_COMMAND_DIR="${PWD}/.claude/commands"
+mkdir -p "$CLAUDE_PROJECT_COMMAND_DIR"
+cp "$TMP_COMMAND" "$CLAUDE_PROJECT_COMMAND_DIR/$INSTALL_NAME"
+print_success "Claude project command installed: $CLAUDE_PROJECT_COMMAND_DIR/$INSTALL_NAME"
 
 # Claude Code (personal skills directory, if detected)
 CLAUDE_SKILLS_DIR=""
@@ -107,12 +125,13 @@ if [ -n "$CLAUDE_SKILLS_DIR" ]; then
   OPTIONAL_INSTALLED=$((OPTIONAL_INSTALLED + 1))
 fi
 
-# Cursor (commands folder)
+# Cursor (skills folder)
 if [ -d "$HOME/.cursor" ]; then
-  CURSOR_DIR="$HOME/.cursor/commands"
-  mkdir -p "$CURSOR_DIR"
-  cp "$TMP_COMMAND" "$CURSOR_DIR/$INSTALL_NAME"
-  print_success "Cursor command installed: $CURSOR_DIR/$INSTALL_NAME"
+  CURSOR_SKILL_DIR="$HOME/.cursor/skills/$INSTALL_DIRNAME"
+  CURSOR_SKILL_FILE="$CURSOR_SKILL_DIR/SKILL.md"
+  mkdir -p "$CURSOR_SKILL_DIR"
+  cp "$TMP_SKILL" "$CURSOR_SKILL_FILE"
+  print_success "Cursor skill installed: $CURSOR_SKILL_FILE"
   OPTIONAL_INSTALLED=$((OPTIONAL_INSTALLED + 1))
 fi
 
@@ -122,6 +141,28 @@ if command -v opencode >/dev/null 2>&1 || [ -d "$HOME/.config/opencode" ]; then
   mkdir -p "$OPENCODE_DIR"
   cp "$TMP_COMMAND" "$OPENCODE_DIR/$INSTALL_NAME"
   print_success "OpenCode command installed: $OPENCODE_DIR/$INSTALL_NAME"
+  OPTIONAL_INSTALLED=$((OPTIONAL_INSTALLED + 1))
+fi
+
+# Cursor (commands folder)
+if [ -d "$HOME/.cursor" ]; then
+  CURSOR_COMMAND_DIR="$HOME/.cursor/commands"
+  mkdir -p "$CURSOR_COMMAND_DIR"
+  cp "$TMP_COMMAND" "$CURSOR_COMMAND_DIR/$INSTALL_NAME"
+  print_success "Cursor command installed: $CURSOR_COMMAND_DIR/$INSTALL_NAME"
+  OPTIONAL_INSTALLED=$((OPTIONAL_INSTALLED + 1))
+fi
+
+# Claude Code (commands folder)
+if [ -d "$HOME/.claude" ] || [ -d "$HOME/.config/claude" ]; then
+  if [ -d "$HOME/.claude" ]; then
+    CLAUDE_COMMAND_DIR="$HOME/.claude/commands"
+  else
+    CLAUDE_COMMAND_DIR="$HOME/.config/claude/commands"
+  fi
+  mkdir -p "$CLAUDE_COMMAND_DIR"
+  cp "$TMP_COMMAND" "$CLAUDE_COMMAND_DIR/$INSTALL_NAME"
+  print_success "Claude Code command installed: $CLAUDE_COMMAND_DIR/$INSTALL_NAME"
   OPTIONAL_INSTALLED=$((OPTIONAL_INSTALLED + 1))
 fi
 
@@ -164,7 +205,7 @@ printf "\n"
 
 if [ "$OPTIONAL_INSTALLED" -eq 0 ]; then
   print_dim "No additional tool locations detected."
-  print_dim "If you use Claude Code globally, copy the project skill into ~/.claude/skills/ui-skills/SKILL.md."
+  print_dim "If you use Cursor or Claude Code globally, copy the project skill into ~/.cursor/skills/ui-skills/SKILL.md or ~/.claude/skills/ui-skills/SKILL.md."
 fi
 
 print_header "Done"
