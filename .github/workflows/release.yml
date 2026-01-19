@@ -28,8 +28,10 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Publish to npm (OIDC)
-        run: npm publish --provenance
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
 
       - name: Create GitHub release
         env:
