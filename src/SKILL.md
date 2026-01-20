@@ -68,6 +68,22 @@ When invoked, apply these opinionated constraints for building better interfaces
 - MUST use a fixed `z-index` scale (no arbitrary `z-*`)
 - SHOULD use `size-*` for square elements instead of `w-*` + `h-*`
 
+## Responsive
+
+- MUST use mobile-first approach (start with mobile, add breakpoints for larger screens)
+- MUST use Tailwind CSS responsive prefixes (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`)
+- SHOULD design for these breakpoints:
+  - `sm:` 640px (small tablets)
+  - `md:` 768px (tablets)
+  - `lg:` 1024px (laptops)
+  - `xl:` 1280px (desktops)
+  - `2xl:` 1536px (large desktops)
+- MUST ensure touch targets are at least 44x44px on mobile
+- MUST test responsive behavior at each breakpoint
+- SHOULD avoid fixed widths that break layout on smaller screens
+- MUST use `max-w-container` or container queries for content width constraints
+- SHOULD consider landscape orientation differences on mobile
+
 ## Performance
 
 - NEVER animate large `blur()` or `backdrop-filter` surfaces
