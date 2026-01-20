@@ -56,6 +56,25 @@ When invoked, apply these opinionated constraints for building better interfaces
 - NEVER introduce custom easing curves unless explicitly requested
 - SHOULD avoid animating large images or full-screen surfaces
 
+## Accessibility
+
+- MUST follow WCAG 2.1 AA guidelines as a baseline
+- MUST ensure keyboard navigability for all interactive elements
+- MUST provide visible focus indicators for keyboard navigation
+- MUST use semantic HTML elements (`<button>`, `<nav>`, `<main>`, `<article>`, etc.)
+- MUST include `alt` text for all images with meaningful content
+- MUST use `aria-label` or `aria-labelledby` for icon-only buttons and inputs
+- MUST ensure color contrast ratios meet WCAG AA (4.5:1 for normal text, 3:1 for large text)
+- MUST support screen readers with proper ARIA attributes
+- SHOULD test with screen reader (NVDA, JAWS, or VoiceOver)
+- MUST provide skip links for main content navigation
+- MUST use `role` attributes only when semantic HTML is insufficient
+- SHOULD test with keyboard-only navigation
+- MUST ensure form inputs have associated labels
+- SHOULD use `prefers-reduced-motion` to respect user motion preferences
+- MUST provide error messages that are announced to screen readers
+- SHOULD use fieldset and legend for related form controls
+
 ## Typography
 
 - MUST use `text-balance` for headings and `text-pretty` for body/paragraphs
