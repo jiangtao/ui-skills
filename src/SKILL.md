@@ -25,6 +25,34 @@ When invoked, apply these opinionated constraints for building better interfaces
 - SHOULD use `tw-animate-css` for entrance and micro-animations in Tailwind CSS
 - MUST use `cn` utility (`clsx` + `tailwind-merge`) for class logic
 
+## Platform
+
+- MUST detect if target platform is Web (browser) or React Native
+- Web platforms: Use web-specific APIs and HTML elements
+- React Native platforms: Use RN-specific components and APIs
+- SHOULD check for `react-native` imports or package.json dependencies to detect RN projects
+- MUST apply platform-specific constraints based on detection
+
+### Web (browser)
+
+- Follow all constraints in this skill file
+- Use HTML elements, CSS, and browser APIs
+- Responsive design applies to viewport size changes
+- Theme follows `prefers-color-scheme`
+
+### React Native
+
+- Replace `h-screen` with `flex-1` for full-height containers
+- Replace `safe-area-inset` with React Native SafeAreaContext
+- Use `StyleSheet.create()` or styled-components for styling
+- Use `Animated` API instead of CSS transitions
+- Use `Pressable`, `TouchableOpacity` for touch interactions
+- Use React Native's `Alert` instead of browser dialogs
+- Use `useColorScheme()` hook for dark mode detection
+- Avoid web-specific CSS properties (backdrop-filter, filters not supported)
+- Use `Platform.select()` for platform-specific code
+- Test on both iOS and Android when applicable
+
 ## Components
 
 - MUST use accessible component primitives for anything with keyboard or focus behavior (`Base UI`, `React Aria`, `Radix`)
