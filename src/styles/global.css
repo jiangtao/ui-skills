@@ -17,6 +17,18 @@
   --color-parchment-800: #292524;
   --color-parchment-900: #1c1917;
 
+  /* Dark mode colors */
+  --color-parchment-dark-50: #1c1917;
+  --color-parchment-dark-100: #292524;
+  --color-parchment-dark-200: #44403c;
+  --color-parchment-dark-300: #57534e;
+  --color-parchment-dark-400: #78716c;
+  --color-parchment-dark-500: #a8a29e;
+  --color-parchment-dark-600: #d6d3d1;
+  --color-parchment-dark-700: #e5e5e0;
+  --color-parchment-dark-800: #f5f5f0;
+  --color-parchment-dark-900: #fafaf5;
+
   --color-primary: var(--color-parchment-900);
   --color-secondary: var(--color-parchment-600);
   --color-tertiary: var(--color-parchment-400);
@@ -38,4 +50,22 @@
 .prose :where(code):not( :where([class~="not-prose"], [class~="not-prose"] *))::before,
 .prose :where(code):not( :where([class~="not-prose"], [class~="not-prose"] *))::after {
   content: "";
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: var(--color-parchment-dark-50);
+    --color-secondary: var(--color-parchment-dark-200);
+    --color-tertiary: var(--color-parchment-dark-400);
+  }
+
+  ::selection {
+    background-color: #78716c7c;
+    color: inherit;
+  }
+
+  .prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    background-color: var(--color-parchment-dark-200);
+    color: var(--color-parchment-dark-800);
+  }
 }

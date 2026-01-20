@@ -123,3 +123,18 @@ When invoked, apply these opinionated constraints for building better interfaces
 - MUST give empty states one clear next action
 - SHOULD limit accent color usage to one per view
 - SHOULD use existing theme or Tailwind CSS color tokens before introducing new ones
+
+## Theme
+
+- MUST support both light and dark modes
+- MUST respect system preference using `prefers-color-scheme`
+- SHOULD provide a manual theme toggle when theme affects readability
+- MUST use CSS custom properties for theme colors to enable easy switching
+- MUST ensure sufficient contrast in both light and dark modes
+- SHOULD test all components in both themes
+- MUST avoid hardcoded colors that don't adapt to theme changes
+- SHOULD use Tailwind CSS `dark:` prefix for dark mode styles
+- MUST ensure images, graphics, and icons work in both themes
+- SHOULD consider using SVG with `currentColor` for theme-aware icons
+- MUST persist user's theme preference (if manual toggle is provided)
+- SHOULD avoid purely decorative differences between themes
