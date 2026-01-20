@@ -83,6 +83,11 @@ When invoked, apply these opinionated constraints for building better interfaces
 - SHOULD avoid fixed widths that break layout on smaller screens
 - MUST use `max-w-container` or container queries for content width constraints
 - SHOULD consider landscape orientation differences on mobile
+- CONSIDER `amfe-flexible` or similar viewport scaling solutions for older mobile browsers requiring rem-based scaling
+- When using amfe-flexible:
+  - MUST set viewport meta tag: `<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">`
+  - SHOULD use `rem` units for font sizes and spacing instead of fixed `px`
+  - MUST test on actual devices to verify scaling behavior
 
 ## Performance
 
