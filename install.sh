@@ -1,9 +1,10 @@
 #!/bin/sh
 set -e
 
-# UI Skills installer
+# UI FE Skills installer
 # Installs the skill into project skill directories for Cursor and Claude,
 # plus optional command locations for supported tools.
+# Based on UI Skills by ibelick (https://github.com/ibelick/ui-skills)
 
 # Colors (only if stdout is a TTY)
 if [ -t 1 ]; then
@@ -88,7 +89,7 @@ while [ $# -gt 0 ]; do
       fi
       ;;
     --help|-h)
-      echo "UI Skills Installer"
+      echo "UI FE Skills Installer"
       echo ""
       echo "Usage: $0 [OPTIONS]"
       echo ""
